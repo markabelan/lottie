@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stacked Lotties (fixed independent speeds)</title>
+
+  <!-- Lottie Web -->
+  <script src="https://unpkg.com/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+
+  <style>
+    /* Wrapper: width 560px, no fixed height */
+    .lottie-stack {
+      width: 560px;
+      max-width: 100%;
+      margin: 0 auto;
+      position: relative;
+      aspect-ratio: 16 / 9; /* adjust if your animations aren't 16:9 */
+      overflow: hidden;
+    }
+
+    .layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="lottie-stack">
+    <!-- bottom-most -->
+    <div class="layer" id="bg"></div>
+
+    <!-- overlays -->
+    <div class="layer" id="green"></div>
+    <div class="layer" id="red"></div>
+    <div class="layer" id="yellow"></div>
+  </div>
+
+  <script>
+    const URLS = {
+      bg:     "https://raw.githubusercontent.com/markabelan/lottie/refs/heads/main/Background.json",
+      green:  "https://raw.githubusercontent.com/markabelan/lottie/refs/heads/main/Green.json",
+      red:    "https://raw.githubusercontent.com/markabelan/lottie/refs/heads/main/Red.json",
+      yellow: "https://raw.githubusercontent.com/markabelan/lottie/refs/heads/main/Yello.json",
+    };
+
+    // Background (bottom)
+    const animBG = lottie.loadAnimation({
+      container: document.getElementById("bg"),
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: URLS.bg
+    });
+
+    // Overlays (top)
+    const animGreen = lottie.loadAnimation({
+      container: document.getElementById("green"),
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: URLS.green
+    });
+
+    const animRed = lottie.loadAnimation({
+      container: document.getElementById("red"),
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: URLS.red
+    });
+
+    const animYellow = lottie.loadAnimation({
+      container: document.getElementById("yellow"),
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: URLS.yellow
+    });
+
+    // Fixed independent speeds
+    animGreen.setSpeed(1);
+    animRed.setSpeed(0.5);
+    animYellow.setSpeed(0.25);
+  </script>
+</body>
+</html>
